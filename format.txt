@@ -1,0 +1,53 @@
+{custom_scroll_spacer}{title} {custom_italic_by} {artist} {custom_italic_from} {album}
+
+############################################################################
+
+Format the first line of this file to give the desired output:
+
+e.g.
+
+The currently playing track is: {title} by {artist} from {album}
+
+  will result in:
+
+The currently playing track is: The Title of The Song by The Artist from The Album
+
+  where the text "The Title of The Song", "The Artist" and "The Album"
+  were read from Rhythmbox's database.
+
+Properties read from Rhythmbox's Database:
+	
+	bpm
+	year
+	title
+	album
+	genre
+	rating
+	artist
+	comment
+	summary
+	bitrate
+	subtitle
+	composer
+	disc_num
+	copyright
+	track_num
+	media_type
+	play_count
+	discs_total
+	description
+	album_artist
+	track_length
+	tracks_total
+	
+	The following two properties contain the same data, formatted differently:
+		
+		last_played
+		last_played_str
+		
+	Also use custom properties from "custom-props.txt"
+
+All the standard properties and their values in one line (for convenience):
+	
+		bpm={bpm}, year={year}, title={title}, album={album}, genre={genre}, rating={rating}, artist={artist}, comment={comment}, summary={summary}, bitrate={bitrate}, subtitle={subtitle}, composer={composer}, disc_num={disc_num}, copyright={copyright}, track_num={track_num}, media_type={media_type}, play_count={play_count}, discs_total={discs_total}, last_played={last_played}, description={description}, album_artist={album_artist}, track_length={track_length}, tracks_total={tracks_total}, last_played_str={last_played_str}
+	

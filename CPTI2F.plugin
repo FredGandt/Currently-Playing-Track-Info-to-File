@@ -1,0 +1,10 @@
+[Plugin]
+Loader=python3
+Module=CPTI2F
+IAge=2
+Name=Currently Playing Track Info to File
+Description=Maintain custom formatted .txt and .json files containing the information about the tracks being played
+Authors=Kyle Florence <kyle.florence@gmail.com>, Fred Gandt
+Copyright=Copyright © 2009 Kyle Florence
+Website=https://github.com/FredGandt?tab=repositories
+

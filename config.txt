@@ -1,0 +1,167 @@
+# Things to note:
+## This file is read line by line; settings MUST BE on separate lines.
+## Settings are used to override default settings.
+### If missing, empty or commented out, the respective default will be used.
+### "missing" means the "setting=value" is not present in this file.
+### "commented out" means the line starts with a "#" symbol, like this line.
+### "empty" means no text following the respective "=" symbol:
+#### i.e. "setting=" as opposed to "setting=value".
+#### White-space characters like "space" and "tab" are counted as text.
+
+## Quote marks in setting values will be taken literally:
+### i.e. "setting="value"" should be written as "setting=value",
+### unless you want "value" to include a leading and trailing quote mark.
+
+############################### CONFIG START ###############################
+
+# Track information may be output to .txt and/or .json files.
+# Set to "true" or "false":
+
+output_txt=true
+output_json=true
+
+############################################################################
+
+# The full path to the .txt output file:
+## e.g. (the default) "/home/<user>/Documents/rhythmbox-track-info.txt"
+
+output_txt_path=
+
+############################################################################
+
+# The full path to the .json output file:
+## e.g. (the default) "/home/<user>/Documents/rhythmbox-track-info.json"
+
+output_json_path=
+
+############################################################################
+
+# The full path to the .txt formatting file.
+## Formatting of the output to .txt file is controlled by the data in this file:
+## e.g. (the default) "/home/<user>/.local/share/rhythmbox/plugins/CPTI2Txt/format.txt"
+
+format_path=
+
+############################################################################
+
+# Custom properties ("props") can be created to assist .txt output formatting;
+## see that file for more information.
+## The full path to the custom props file:
+## e.g. (the default) "/home/<user>/.local/share/rhythmbox/plugins/CPTI2Txt/custom-props.txt"
+
+custom_props_path=
+
+############################################################################
+
+# Some files are read repeatedly during the operation of this plugin; caching the data from
+# these files the first time they're read is better for system performance, but changes
+# to the files will only take effect after restarting Rhythmbox or this plugin.
+# Not caching the file data allows changes to take immediate effect.
+# Set to "true" or "false":
+
+# Cache this configuration?
+
+cache_config=false
+
+# Cache the format file?
+
+cache_format=false
+
+# Cache custom properties?
+
+cache_custom_props=false
+
+############################################################################
+
+# If the properties "{artist}" or "{album_artist}" are empty or state "unknown"
+# in the Rhythmbox database, fallback to the other property before formatting .txt output?
+## NOTE: These settings only affect .txt output; JSON output includes both values.
+## The plugin cannot distinguish between an artist named "Unknown" and "unknown" being stated as fact.
+## If both properties are empty or state "unknown", the fallback will achieve nothing useful:
+### i.e. The plugin doesn't establish what the music artist should be called if it's not in the database.
+# Set to "true" or "false":
+
+artist_fallback_empty=true
+artist_fallback_unknown=true
+
+############################################################################
+
+# The output files may have track info appended, prepended or overwritten:
+## "overwrite" will maintain only one formatted line of track info.
+## "append" will add new track info to the end of the output file, on a new line.
+## "prepend" will add new track info to the start of the output file, on its own line.
+
+### Changing the value from "append" to "prepend", or vice versa, has the effect of
+### changing the logical order of any record of played tracks:
+#### e.g. If "append" is set with a limit of 5, the 5 tracks will be chronologically ordered
+#### with the last entry (last line of .txt or last element of the "tracks" array in .json)
+#### being the last played. If the value is changed to "prepend", the the last played track
+#### must be first, so the order of the record is reversed to compensate for the change in logic.
+### JSON, containing a copy of the configuration that birthed it, can make sense of this
+### issue across multiple sessions, but the .txt record can only have the logical order maintained
+### correctly, in the face of changes to these settings, during a live session:
+#### i.e. The logical order of a .txt record of played tracks may be corrupted if this setting
+#### is changed between Rhythmbox sessions.
+# Set to "overwrite" or "append" or "prepend":
+
+output_txt_record=overwrite
+output_json_record=prepend
+
+# BEWARE: there is no hard-coded limit on the size of the output files!
+## If "output_*_record_limit" is "0" (zero limit), and "output_*_record" is NOT "overwrite",
+## the respective files will grow without restriction.
+## If appending or prepending track info to either .txt or .json files,
+## use "output_*_record_limit" to limit the record's length.
+## If "output_*_record_limit" is "1", "overwrite" will be used
+## regardless of the respective "output_*_record" setting.
+# Set to a non-negative integer:
+
+output_txt_record_limit=5
+output_json_record_limit=5
+
+# JSON may be output in human readable or condensed format.
+## A positive integer indicates the number of spaces to use to indent the JSON.
+## "tab" may be used to indent with tabs.
+## "0" (zero) will remove indentation and output condensed JSON.
+## Set to "0", a positive integer or "tab":
+
+output_json_record_pretty=tab
+
+# JSON output will include the plugin configuration settings, for convenience.
+## Two additional, imaginatively named, properties will be added to the "config":
+### "utc_timestamp" will be a UTC timestamp of the file write time.
+### "playing" will be either "true" or "false", indicating if the player is playing.
+## BEWARE: System paths excluded from the "config" by default. If this setting is set to "false",
+## system paths to the files accessed by this plugin WILL BE included in the JSON output.
+# Set to "true" or "false":
+
+output_json_record_exclude_paths=true
+
+############################################################################
+
+# When there is no currently playing track, choose how to maintain the output files:
+## If empty or set to "keep", the file will remain as it was before the player stopped.
+## "delete" will delete the file (it will be recreated the next time the music starts).
+# Set to "keep", "delete" or "default":
+
+output_txt_maintenance=keep
+
+## If "output_txt_maintenance" is set to "default" and "output_default_txt" is not empty, its content will be
+## added to it in accordance with the currently set "output_txt_record" and "output_txt_record_limit" configuration.
+### If set to "default" but "output_default_txt" is empty, "output_txt_maintenance" will fallback to "keep".
+## Custom properties may be used to format the output:
+### e.g. "{custom_scroll_spacer}{custom_default_text}"
+
+output_default_txt=
+
+## The .json file will have the "playing" property of its "config" updated to "false" if not set to "delete" and
+## the player was not playing when the plugin was stopped (this is a bit derpy):
+# Set to "keep" or "delete":
+
+output_json_maintenance=keep
+
+################################ CONFIG END ################################
+
+# TODO:
+## Possibly include optional JSON output over the network via e.g. FTP?
+

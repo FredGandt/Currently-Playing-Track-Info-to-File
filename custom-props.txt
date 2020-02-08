@@ -1,0 +1,27 @@
+# Custom properties for output formatting.
+## Properties defined here may be used in the .txt formatting file for convenience.
+
+## Names MUST be unique; "custom_" will be automatically prepended to the names, but
+## the properties MUST be fully named (including the leading "custom_") when used in
+## the "format.txt" file.
+
+## The syntax for a custom properties defined in this file is (excluding the "### "):
+### property_name=Property Value
+
+## Values will be interpreted as text (even if they're numbers or symbols).
+
+## Depending on many intricate variables, some less than standard characters may be used.
+### The following site, for example, lists a block of unicode characters,
+### that allow italics (amongst other things) to be added to the output.
+#### https://www.compart.com/en/unicode/block/U+1D400
+##### e.g. 𝘢 𝘣 𝘤 𝘥 𝘦 𝘧 𝘨 𝘩 𝘪 𝘫 𝘬 𝘭 𝘮 𝘯 𝘰 𝘱 𝘲 𝘳 𝘴 𝘵 𝘶 𝘷 𝘸 𝘹 𝘺 𝘻 
+
+############################################################################
+
+scroll_spacer=   =^.^=   
+
+italic_from=𝘧𝘳𝘰𝘮 𝘵𝘩𝘦 𝘢𝘭𝘣𝘶𝘮
+italic_by=𝘣𝘺
+
+default_text=Go placidly amid the noise and the haste, and remember what peace there may be in silence.
+
