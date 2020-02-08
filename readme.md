@@ -22,4 +22,5 @@ Open the terminal and type `rhythmbox -D CPTI2F` then Enter; Rhythmbox will star
 ## License (carried over from [the origin of this fork](https://github.com/kflorence/rhythmbox-nowplaying-xml)):
 
 Copyright (c) 2011 Kyle Florence
+
 Released under the MIT license.
