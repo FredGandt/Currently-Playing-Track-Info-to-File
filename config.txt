@@ -168,4 +168,5 @@ output_json_maintenance=keep
 ################################ CONFIG END ################################
 
 # TODO:
+## Convert this configuration method to GUI
 ## Possibly include optional JSON output over the network via e.g. FTP?
