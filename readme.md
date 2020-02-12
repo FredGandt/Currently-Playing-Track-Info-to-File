@@ -1,5 +1,5 @@
 # Currently Playing Track Info to File
-## Rhythmbox plugin that generates TXT and/or JSON documents containing the currently playing track information.
+## [Rhythmbox](https://github.com/GNOME/rhythmbox) plugin that generates TXT and/or JSON documents containing the currently playing track information.
 
 As Rhythmbox plays, this plugin reads information about the currently playing track from the Rhythmbox Database, performs some formatting per the user's configuration settings, then outputs the information to either a `.txt` file, `.json` file or both.
 
