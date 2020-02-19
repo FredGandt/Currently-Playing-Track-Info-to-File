@@ -124,9 +124,8 @@ class CPTI2F (GObject.Object, Peas.Activatable):
 		return fullmatch(r"[a-z_]+_path", p) is not None
 		
 	def collate_track_info(self, *args):
-		playing = self.PLAYER.get_playing()[1]
 		entry = self.PLAYER.get_playing_entry()
-		if playing and entry is not None and entry != self.known_entry:
+		if self.is_playing() and entry is not None and entry != self.known_entry:
 			output_txt, output_json = self.configs_get("output_txt", "output_json")
 			if not output_txt and not output_json:
 				print("Both txt and json output settings in config are false; nothing to do")
@@ -217,6 +216,9 @@ class CPTI2F (GObject.Object, Peas.Activatable):
 						self.form_info = form_info
 				self.write_txt_file(txt_props, form_info)
 				
+	def is_playing(self):
+		return self.PLAYER.get_playing_entry() is not None
+		
 	def pre_format_props(self, t, k, v):
 		result = {"raw": v, "formatted": v}
 		if k == "track_length":
@@ -271,7 +273,7 @@ class CPTI2F (GObject.Object, Peas.Activatable):
 	def write_json_file(self, json_props=None):
 		config = self.config_the_config().copy()
 		record = config["output_json_record"]
-		path = config["paths"]["output_json_path"]
+		path = config["paths"]["output_json_path"] # TODO: check old path if known and move file if found
 		limit = config["output_json_record_limit"]
 		pretty = config["output_json_record_pretty"]
 		jso = {"tracks":[],"config":{"paths":{}}}
@@ -296,7 +298,7 @@ class CPTI2F (GObject.Object, Peas.Activatable):
 		if config["output_json_record_exclude_paths"]:
 			del config["paths"]
 		config["utc_timestamp"] = datetime.utcnow().timestamp() # is this even useful?
-		config["playing"] = self.PLAYER.get_playing()[1] # derpy
+		config["playing"] = self.is_playing()
 		jso["config"] = config
 		with open(path, "w") as f:
 			pet = pretty == "tab"
@@ -310,7 +312,7 @@ class CPTI2F (GObject.Object, Peas.Activatable):
 			
 	def write_txt_file(self, props, to_format):
 		if isinstance(to_format, str) and len(to_format):
-			path, record, limit = self.configs_get("output_txt_path", "output_txt_record", "output_txt_record_limit")
+			path, record, limit = self.configs_get("output_txt_path", "output_txt_record", "output_txt_record_limit") # TODO: check old path if known and move file if found
 			info = to_format.format(**props)
 			trax = []
 			if limit == 1:
